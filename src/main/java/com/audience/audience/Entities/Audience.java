@@ -21,13 +21,14 @@ public class Audience implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idAudience;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "GMT")
-    private Date StartTime;
+    private Date startTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "GMT")
-    private Date EndTime;
-    private String tribunal;
+    private Date endTime;
+    private String location;
     private String juge;
     private String Subject;
     private boolean IsAllDay;
     private String Description;
+
 
 }
