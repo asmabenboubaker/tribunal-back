@@ -29,6 +29,8 @@ public class Audience implements Serializable {
     private String Subject;
     private boolean IsAllDay;
     private String Description;
+    private String demandeur;
+    private String defendeur;
 
 
 }

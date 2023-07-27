@@ -67,6 +67,19 @@ public class AudienceRestController {
             throw e;
         }
     }
+    @PostMapping ("/selectByLocation")
+    public ResponseEntity<List<Audience>> selectByLocation(@RequestParam("location") String location) {
+        try {
+            // Use the iAudienceRepo to retrieve the audiences with the given location
+            List<Audience> audiences = iAudienceRepo.findAllByLocation(location);
+
+            // Return the list of audiences in the response
+            return ResponseEntity.ok(audiences);
+        } catch (Exception e) {
+            e.printStackTrace(); // Add this line to print the exception details to the console
+            throw e;
+        }
+    }
 
     public static class EditParams {
         private String key;
