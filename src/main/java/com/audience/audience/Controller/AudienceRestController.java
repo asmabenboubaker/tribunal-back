@@ -3,8 +3,11 @@ package com.audience.audience.Controller;
 import com.audience.audience.Entities.Audience;
 import com.audience.audience.Repository.IAudienceRepo;
 import com.audience.audience.Service.IAudienceService;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
@@ -16,16 +19,50 @@ import java.util.List;
 @RequestMapping("/api/schedule")
 public class AudienceRestController {
 
+    @Autowired
     private final IAudienceService iAudienceService;
     @Autowired
     private IAudienceRepo iAudienceRepo;
 
 
-    @PostMapping("/loadData")
+
+    @RequestMapping(value="/addAudience", method= RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Audience> addAudience(@RequestBody Audience audience) {
+        Audience createdAudience = iAudienceService.addAudience(audience);
+        System.out.println("aaaaaaaaaaaa"+createdAudience.getEndDate());
+        return new ResponseEntity<>(createdAudience, HttpStatus.CREATED);
+    }
+    @GetMapping("/loadData")
     public ResponseEntity<List<Audience>> loadData() {
         List<Audience> data = iAudienceService.listAudiences();
         return ResponseEntity.ok(data);
     }
+
+    @DeleteMapping("/deleteAudience/{id}")
+    public ResponseEntity<String> deleteAudience(@PathVariable int id) {
+        try {
+            iAudienceRepo.deleteById(id);
+            return ResponseEntity.ok("Audience deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+        }
+    }
+    @PutMapping("/updateAudience/{id}")
+    public ResponseEntity<Audience> updateAudience(@PathVariable int id, @RequestBody Audience updatedAudience) {
+        Audience existingAudience = iAudienceRepo.findById(id).get();
+
+        if (existingAudience == null) {
+            return ResponseEntity.notFound().build();
+        }
+        existingAudience.setText(updatedAudience.getText());
+        existingAudience.setStartDate(updatedAudience.getStartDate());
+        existingAudience.setEndDate(updatedAudience.getEndDate());
+
+        Audience updated = iAudienceService.addAudience(existingAudience);
+        return ResponseEntity.ok(updated);
+    }
+
     @PostMapping("/updateData")
     public ResponseEntity<List<Audience>> updateData(@RequestBody EditParams param) {
 
@@ -67,19 +104,7 @@ public class AudienceRestController {
             throw e;
         }
     }
-    @PostMapping ("/selectByLocation")
-    public ResponseEntity<List<Audience>> selectByLocation(@RequestParam("location") String location) {
-        try {
-            // Use the iAudienceRepo to retrieve the audiences with the given location
-            List<Audience> audiences = iAudienceRepo.findAllByLocation(location);
 
-            // Return the list of audiences in the response
-            return ResponseEntity.ok(audiences);
-        } catch (Exception e) {
-            e.printStackTrace(); // Add this line to print the exception details to the console
-            throw e;
-        }
-    }
 
     public static class EditParams {
         private String key;

@@ -24,4 +24,10 @@ public class AudienceService implements IAudienceService{
     public List<Audience> listAudiences() {
         return (List<Audience>) audienceRepo.findAll();
     }
+
+    @Override
+    public void deleteAudience(int id) {
+        audienceRepo.deleteById(id);
+    }
+
 }

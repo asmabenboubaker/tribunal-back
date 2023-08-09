@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface IAudienceRepo extends CrudRepository<Audience, Integer> {
 
-        List<Audience> findAllByLocation(String location);
 
 }

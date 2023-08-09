@@ -1,6 +1,7 @@
 package com.audience.audience.Entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,16 +22,18 @@ public class Audience implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idAudience;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "GMT")
-    private Date startTime;
+    @JsonProperty("startDate")
+    private Date startDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "GMT")
-    private Date endTime;
-    private String location;
-    private String juge;
-    private String Subject;
-    private boolean IsAllDay;
-    private String Description;
-    private String demandeur;
-    private String defendeur;
+    @JsonProperty("endDate")
+    private Date endDate;
+
+
+    @JsonProperty("text")
+    private String text;
+    @JsonProperty("allDay")
+    private boolean allDay;
+    private String description;
 
 
 }
