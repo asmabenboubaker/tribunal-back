@@ -62,6 +62,17 @@ public class AudienceRestController {
         Audience updated = iAudienceService.addAudience(existingAudience);
         return ResponseEntity.ok(updated);
     }
+    @GetMapping("/AudienceByLocation/{location}")
+    public List<Audience> getFilteredAppointmentsByLocation(@PathVariable String location) {
+        return iAudienceService.getFilteredAppointmentsByLocation(location);
+    }
+
+
+
+
+
+
+
 
     @PostMapping("/updateData")
     public ResponseEntity<List<Audience>> updateData(@RequestBody EditParams param) {

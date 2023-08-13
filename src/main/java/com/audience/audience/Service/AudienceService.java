@@ -30,4 +30,11 @@ public class AudienceService implements IAudienceService{
         audienceRepo.deleteById(id);
     }
 
+    @Override
+    public List<Audience> getFilteredAppointmentsByLocation(String location) {
+
+            return audienceRepo.findByLocation(location);
+
+    }
+
 }

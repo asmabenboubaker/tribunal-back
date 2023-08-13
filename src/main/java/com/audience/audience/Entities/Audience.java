@@ -34,6 +34,7 @@ public class Audience implements Serializable {
     @JsonProperty("allDay")
     private boolean allDay;
     private String description;
+    private String  location;
 
 
 }
