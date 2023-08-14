@@ -35,6 +35,7 @@ public class Audience implements Serializable {
     private boolean allDay;
     private String description;
     private String  location;
+    private int tribunal;
 
 
 }

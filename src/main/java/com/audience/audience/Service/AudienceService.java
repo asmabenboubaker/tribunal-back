@@ -31,9 +31,9 @@ public class AudienceService implements IAudienceService{
     }
 
     @Override
-    public List<Audience> getFilteredAppointmentsByLocation(String location) {
+    public List<Audience> getFilteredAppointmentsByLocation(int location) {
 
-            return audienceRepo.findByLocation(location);
+            return audienceRepo.findAllByTribunal(location);
 
     }
 

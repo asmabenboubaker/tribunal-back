@@ -63,7 +63,7 @@ public class AudienceRestController {
         return ResponseEntity.ok(updated);
     }
     @GetMapping("/AudienceByLocation/{location}")
-    public List<Audience> getFilteredAppointmentsByLocation(@PathVariable String location) {
+    public List<Audience> getFilteredAppointmentsByLocation(@PathVariable int location) {
         return iAudienceService.getFilteredAppointmentsByLocation(location);
     }
 
