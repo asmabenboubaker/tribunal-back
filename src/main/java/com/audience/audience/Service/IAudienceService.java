@@ -10,5 +10,6 @@ public interface IAudienceService {
     List<Audience> listAudiences();
    void deleteAudience(int id);
    List<Audience> getFilteredAppointmentsByLocation(int location);
+   List<Audience> getFilteredAppointmentByRoom(String room);
 
 }

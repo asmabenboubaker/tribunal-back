@@ -36,6 +36,7 @@ public class Audience implements Serializable {
     private String description;
     private String  location;
     private int tribunal;
+    private String rooms;
 
 
 }

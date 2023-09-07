@@ -37,4 +37,9 @@ public class AudienceService implements IAudienceService{
 
     }
 
+    @Override
+    public List<Audience> getFilteredAppointmentByRoom(String room) {
+        return audienceRepo.findAllByRooms(room);
+    }
+
 }

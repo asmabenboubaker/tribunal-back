@@ -58,7 +58,9 @@ public class AudienceRestController {
         existingAudience.setText(updatedAudience.getText());
         existingAudience.setStartDate(updatedAudience.getStartDate());
         existingAudience.setEndDate(updatedAudience.getEndDate());
-
+        existingAudience.setDescription(updatedAudience.getDescription());
+        existingAudience.setTribunal(updatedAudience.getTribunal());
+        existingAudience.setRooms(updatedAudience.getRooms());
         Audience updated = iAudienceService.addAudience(existingAudience);
         return ResponseEntity.ok(updated);
     }
@@ -66,12 +68,10 @@ public class AudienceRestController {
     public List<Audience> getFilteredAppointmentsByLocation(@PathVariable int location) {
         return iAudienceService.getFilteredAppointmentsByLocation(location);
     }
-
-
-
-
-
-
+    @GetMapping("AudienceByRoom/{room}")
+    public List<Audience>  getFilteredAppointmentsByRoom(@PathVariable String room){
+        return iAudienceService.getFilteredAppointmentByRoom(room);
+    }
 
 
     @PostMapping("/updateData")

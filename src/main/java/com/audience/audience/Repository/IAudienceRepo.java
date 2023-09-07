@@ -10,4 +10,5 @@ import java.util.List;
 public interface IAudienceRepo extends CrudRepository<Audience, Integer> {
 
     List<Audience> findAllByTribunal(int tribunal);
+    List<Audience> findAllByRooms(String room);
 }
